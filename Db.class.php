@@ -28,7 +28,7 @@
 			# @array, The parameters of the SQL query
 			private $parameters;
 			
-	       /**
+	 /**
 		*   Default Constructor 
 		*
 		*	1. Instantiate Log class.
@@ -42,13 +42,13 @@
 				$this->parameters = array();
 			}
 
-	       /**
-	   	*	This method makes connection to the database.
-	   	*	
-	  	*	1. Reads the database settings from a ini file. 
-	    	*	2. Puts  the ini content into the settings array.
+	 /**
+	 	*	This method makes connection to the database.
+	  *	
+	  *	1. Reads the database settings from a ini file. 
+	  *	2. Puts  the ini content into the settings array.
 		*	3. Tries to connect to the database.
-		*	4. If connection failed, exception is displayed and a log file gets created.
+	  *	4. If connection failed, exception is displayed and a log file gets created.
 		*/
 			private function Connect()
 			{
@@ -75,7 +75,7 @@
 					die();
 				}
 			}
-	       /**
+	 /**
 		*	Every method which needs to execute a SQL query uses this method.
 		*	
 		*	1. If not connected, connect to the database.
@@ -119,7 +119,7 @@
 					$this->parameters = array();
 			}
 			
-	       /**
+	 /**
 		*	@void 
 		*
 		*	Add the parameter to the parameter array
@@ -130,7 +130,7 @@
 			{	
 				$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . $value;
 			}
-	       /**
+	 /**
 		*	@void
 		*	
 		*	Add more parameters to the parameter array
@@ -145,13 +145,13 @@
 					}
 				}
 			}
-	   /**
-	    *   If the SQL query  contains a SELECT statement it returns an array containing all of the result set row
-	    *	If the SQL statement is a DELETE, INSERT, or UPDATE statement it returns the number of affected rows
-	    *
-	   	*   @param  string $query
-	   	*	@param  array  $params
-	   	*	@param  int    $fetchmode
+	 /**
+		*   If the SQL query  contains a SELECT statement it returns an array containing all of the result set row
+		*	If the SQL statement is a DELETE, INSERT, or UPDATE statement it returns the number of affected rows
+		*
+		*   @param  string $query
+		*	@param  array  $params
+		*	@param  int    $fetchmode
 		*	@return mixed
 		*/			
 			public function query($query,$params = null,$fetchmode = PDO::FETCH_ASSOC)
@@ -170,7 +170,7 @@
 					return NULL;
 				}
 			}		
-	       /**
+	 /**
 		*	Returns an array which represents a column from the result set 
 		*
 		*	@param  string $query
@@ -191,7 +191,7 @@
 				return $column;
 				
 			}	
-	       /**
+	 /**
 		*	Returns an array which represents a row from the result set 
 		*
 		*	@param  string $query
@@ -204,7 +204,7 @@
 				$this->Init($query,$params);
 				return $this->sQuery->fetch($fetchmode);			
 			}
-	       /**
+	 /**
 		*	Returns the value of one single field/column
 		*
 		*	@param  string $query
@@ -217,12 +217,12 @@
 				return $this->sQuery->fetchColumn();
 			}
 	/**	
-         * Writes the log and returns the exception
-         *
-         * @param  string $message
-         * @param  string $sql
-         * @return string
-         */
+   * Writes the log and returns the exception
+   *
+   * @param  string $message
+   * @param  string $sql
+   * @return string
+   */
 			private function ExceptionLog($message , $sql = "")
 			{
 				$exception  = 'Unhandled Exception. <br />';

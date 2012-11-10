@@ -7,7 +7,7 @@
 	*/
 		class Log {
 			
-		   		#  @string, Log directory name
+		    	#  @string, Log directory name
 				private $path = '/logs/';
 			
 				# @void, Default Constructor, Sets the timezone and path of the log files.

@@ -3,7 +3,7 @@
  *  DB - A simple database class 
  *
  * @author		Author: Vivek Wicky Aswal. (https://twitter.com/#!/VivekWickyAswal)
- * @git 			htt://github.com/indieteq-vivek/simple-db-class
+ * @git 		htt://github.com/indieteq-vivek/simple-db-class
  * @version      0.2ab
  *
  */

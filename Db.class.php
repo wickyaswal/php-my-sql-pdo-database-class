@@ -1,12 +1,12 @@
 <?php
 /**
-*  DB - A simple database class 
-*
-* @author		Author: Vivek Wicky Aswal. (https://twitter.com/#!/VivekWickyAswal)
-* @git 			htt://github.com/indieteq-vivek/simple-db-class
-* @version      0.2ab
-*
-*/
+ *  DB - A simple database class 
+ *
+ * @author		Author: Vivek Wicky Aswal. (https://twitter.com/#!/VivekWickyAswal)
+ * @git 			htt://github.com/indieteq-vivek/simple-db-class
+ * @version      0.2ab
+ *
+ */
 	require("Log.class.php");
 	class DB
 	{
@@ -28,7 +28,7 @@
 			# @array, The parameters of the SQL query
 			private $parameters;
 			
-	 /**
+	   /**
 		*   Default Constructor 
 		*
 		*	1. Instantiate Log class.

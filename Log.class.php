@@ -5,12 +5,12 @@
 	* @git 			htt://github.com/indieteq-vivek/simple-db-class
 	* @version      0.1a
 	*/
-		class Log {
+	class Log {
 			
-		    	#  @string, Log directory name
-				private $path = '/logs/';
+		    # @string, Log directory name
+		    	private $path = '/logs/';
 			
-				# @void, Default Constructor, Sets the timezone and path of the log files.
+			# @void, Default Constructor, Sets the timezone and path of the log files.
 				public function __construct() {
 					date_default_timezone_set('Europe/Amsterdam');	
 					$this->path  = dirname(__FILE__)  . $this->path;	
@@ -32,7 +32,7 @@
 				public function write($message) {
 					$date = new DateTime();
 					$log = $this->path . $date->format('Y-m-d').".txt";
-
+	
 					if(is_dir($this->path)) {
 						if(!file_exists($log)) {
 							$fh  = fopen($log, 'w') or die("Fatal Error !");
@@ -47,7 +47,7 @@
 					else {
 						  if(mkdir($this->path,0777) === true) // Check on true, Otherwise we would have a never-ending loop :S
 						  {
- 							 $this->write($message);  
+	 						 $this->write($message);  
 						  }	
 					}
 				}

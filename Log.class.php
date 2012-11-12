@@ -35,7 +35,7 @@
 
 				if(is_dir($this->path)) {
 					if(!file_exists($log)) {
-						$fh  = fopen($log, 'w') or die("Fatal Error !");
+						$fh  = fopen($log, 'a+') or die("Fatal Error !");
 						$logcontent = "Time : " . $date->format('H:i:s')."\r\n" . $message ."\r\n";
 						fwrite($fh, $logcontent);
 						fclose($fh);
@@ -45,7 +45,7 @@
 					}
 				}
 				else {
-					  if(mkdir($this->path,0777) === true) // Check on true, Otherwise we would have a never-ending loop :S
+					  if(mkdir($this->path,0777) === true) 
 					  {
  						 $this->write($message);  
 					  }	

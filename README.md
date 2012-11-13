@@ -37,7 +37,8 @@ If you want to use these files you''ll have to modify the rights of the logs fol
 
 ## Examples
 
-| Id | Firstname | Lastname | Sex | Age
+#### The table persons,
+| id | Firstname | Lastname | Sex | Age
 |:-----------:|:------------:|:------------:|:------------:|:------------:|
 | 1       |        John |     Doe    | M | 19
 | 2       |        Bob  |     Black    | M | 41
@@ -45,7 +46,7 @@ If you want to use these files you''ll have to modify the rights of the logs fol
 | 4       |        Kona |     Khan    | M | 14
 | 5       |        Kader|     Khan    | M | 56
 
-#### Fetching from the database:
+#### Fetching everything from the table
 ```php
 <?php
 // Fetch whole table
@@ -72,7 +73,7 @@ This method always returns only 1 row.
 ```php
 <?php
 // Fetch a row
-$ages      =  $db->row("SELECT * FROM Persons");
+$ages      =  $db->row("SELECT * FROM Persons WHERE  id = :id", array("id"=>"1"));
 ```
 #### Fetching Single Value:
 This method returns only one single value of a record.
@@ -83,7 +84,7 @@ $db->bind("id","3");
 $firstname = $db->single("SELECT firstname FROM Persons WHERE id = :id");
  
 echo $firstname;
-// Wicky 
+// Zoe 
 ```
 #### Fetching Column:
 ```php
@@ -116,7 +117,7 @@ The easyCRUD is a class which you can use to easily execute basic SQL operations
 It uses the database class I've created to execute the SQL queries.
 
 ## How to use easyCRUD
-#### 1. First, Create a new class. Then require the easyCRUD class.
+#### 1. First, create a new class. Then require the easyCRUD class.
 #### 2. Extend your class and add the following fields to the class.
 ```php
 <?php

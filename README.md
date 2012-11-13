@@ -128,8 +128,9 @@ if($insert > 0 ) {
 EasyCRUD
 ============================
 The easyCRUD is a class which you can use to easily execute basic SQL operations like(insert, update, select, delete) on your database. 
-
 It uses the database class I've created to execute the SQL queries.
+
+Actually it's just a little ORM class.
 
 ## How to use easyCRUD
 #### 1. First, create a new class. Then require the easyCRUD class.
@@ -149,9 +150,9 @@ class YourClass  Extends Crud {
 }
 ```
 
-## Some examples of easyCRUD in action.
+## EasyCRUD in action.
 
-#### Creating a record
+#### Creating a new person
 ```php
 <?php
 // First we"ll have create the instance of the class
@@ -170,7 +171,7 @@ $created = person->Create();
 // SQL Equivalent
 "INSERT INTO persons (Firstname,Age,Sex) VALUES ('Kona','20','F')"
 ```
-#### Deleting a record
+#### Deleting a person
 ```php
 <?php
 // Delete person

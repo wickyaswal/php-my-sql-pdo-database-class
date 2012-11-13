@@ -37,6 +37,14 @@ If you want to use these files you''ll have to modify the rights of the logs fol
 
 ## Examples
 
+| Id | Firstname | Lastname | Sex | Age
+|:-----------:|:------------:|:------------:|:------------:|:------------:|
+| 1       |        John |     Doe    | M | 19
+| 2       |        Bob  |     Black    | M | 41
+| 3       |        Zoe  |     Chan    | F | 20
+| 4       |        Kona |     Khan    | M | 14
+| 5       |        Kader|     Khan    | M | 56
+
 #### Fetching from the database:
 ```php
 <?php

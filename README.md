@@ -38,7 +38,7 @@ If you want to use these files you''ll have to modify the rights of the logs fol
 ## Examples
 
 #### The table persons,
-| id | Firstname | Lastname | Sex | Age
+| id | firstname | lastname | sex | age
 |:-----------:|:------------:|:------------:|:------------:|:------------:|
 | 1       |        John |     Doe    | M | 19
 | 2       |        Bob  |     Black    | M | 41
@@ -66,15 +66,19 @@ $db->bindMore(array("firstname"=>"John","id"=>"1"));
 $person   =  $db->query("SELECT * FROM Persons WHERE firstname = :firstname AND id = :id"));
 
 // 3. Or just give the parameters to the method
-$person    =  $db->query("SELECT * FROM Persons WHERE firstname = :firstname",array("firstname"=>"John","id"=>"1"));
+$person   =  $db->query("SELECT * FROM Persons WHERE firstname = :firstname",array("firstname"=>"John","id"=>"1"));
 ```
 #### Fetching Row:
 This method always returns only 1 row.
 ```php
 <?php
 // Fetch a row
-$ages      =  $db->row("SELECT * FROM Persons WHERE  id = :id", array("id"=>"1"));
+$ages     =  $db->row("SELECT * FROM Persons WHERE  id = :id", array("id"=>"1"));
 ```
+##### Result
+| id | firstname | lastname | sex | age
+|:-----------:|:------------:|:------------:|:------------:|:------------:|
+| 1       |        John |     Doe    | M | 19
 #### Fetching Single Value:
 This method returns only one single value of a record.
 ```php
@@ -82,33 +86,44 @@ This method returns only one single value of a record.
 // Fetch one single value
 $db->bind("id","3");
 $firstname = $db->single("SELECT firstname FROM Persons WHERE id = :id");
- 
-echo $firstname;
-// Zoe 
 ```
+##### Result
+|firstname
+|:------------:
+| Zoe
 #### Fetching Column:
 ```php
 <?php
 // Fetch a column
 $names    =  $db->column("SELECT Firstname FROM Persons");
 ```
-#### Delete a record:
+##### Result
+|firstname | 
+|:-----------:
+|        John 
+|        Bob  
+|        Zoe  
+|        Kona 
+|        Kader
+### Delete / Update / Insert
+When executing the delete, update, or insert statement by using the query method the affected rows will be returned.
 ```php
 <?php
+
 // Delete
 $delete   =  $db->query("DELETE FROM Persons WHERE Id = :id", array("id"=>"1"));
-```
-#### Update a record:
-```php
-<?php
+
 // Update
 $update   =  $db->query("UPDATE Persons SET firstname = :f WHERE Id = :id", array("f"=>"Jan","id"=>"32"));
-```
-#### Insert a record:
-```php
-<?php
-// Create
+
+// Insert
 $insert   =  $db->query("INSERT INTO Persons(Firstname,Age) VALUES(:f,:age)", array("f"=>"Vivek","age"=>"20"));
+
+// Do something with the data 
+if($insert > 0 ) {
+  return 'Succesfully created a new person !';
+}
+
 ```
 EasyCRUD
 ============================
@@ -143,13 +158,13 @@ class YourClass  Extends Crud {
 $person = new person();
  
 // Create new person
-$person->Firstname = "Kona";
-$person->Age  = "20";
-$person->Sex = "F";
-$created = $person->Create();
+$person->Firstname  = "Kona";
+$person->Age        = "20";
+$person->Sex        = "F";
+$created            = $person->Create();
  
 //  Or give the bindings to the constructor
-$person = new person(array("Firstname"=>"Kona","age"=>"20","sex"=>"F"));
+$person  = new person(array("Firstname"=>"Kona","age"=>"20","sex"=>"F"));
 $created = person->Create();
  
 // SQL Equivalent
@@ -159,11 +174,11 @@ $created = person->Create();
 ```php
 <?php
 // Delete person
-$person->Id = "17";
-$deleted = $person->Delete();
+$person->Id  = "17";
+$deleted     = $person->Delete();
  
 // Shorthand method, give id as parameter
-$deleted = $person->Delete(17);
+$deleted     = $person->Delete(17);
  
 // SQL Equivalent
 "DELETE FROM persons WHERE Id = 17 LIMIT 1"

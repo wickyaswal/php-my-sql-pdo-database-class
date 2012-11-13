@@ -2,4 +2,4 @@
 host = localhost
 user = root
 password = 
-dbname = ultim
+dbname = testdb

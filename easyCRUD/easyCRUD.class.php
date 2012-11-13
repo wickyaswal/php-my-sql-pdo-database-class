@@ -12,16 +12,28 @@ class Crud {
 
 	public $variables;
 
+	public function __construct($data = array()) {
+		$this->db =  new DB();	
+		$this->variables  = $data;
+	}
+
 	public function __set($name,$value){
-		$this->variables[$name] = $value;
+		if(strtolower($name) === $this->pk) {
+			$this->variables[$this->pk] = $value;
+		}
+		else {
+			$this->variables[$name] = $value;
+		}
 	}
 
 	public function __get($name)
 	{	
-		if(array_key_exists($name,$this->variables)) {
-			return $this->variables[$name];
+		if(is_array($this->variables)) {
+			if(array_key_exists($name,$this->variables)) {
+				return $this->variables[$name];
+			}
 		}
-		
+
 		$trace = debug_backtrace();
 		trigger_error(
 		'Undefined property via __get(): ' . $name .
@@ -29,11 +41,6 @@ class Crud {
 		' on line ' . $trace[0]['line'],
 		E_USER_NOTICE);
 		return null;
-	}
-
-	public function __construct($data = array()) {
-		$this->db =  new DB();	
-		$this->variables  = $data;
 	}
 
 	public function save($id = "0") {

@@ -132,7 +132,7 @@ if($insert > 0 ) {
 Every method which executes a query has the optional parameter called bindings.
 
 The <i>row</i> and the <i>query</i> method have a third optional parameter  which is the fetch style.
-The default fetch style is PDO::FETCH_ASSOC which returns an associative array.
+The default fetch style is <i>PDO::FETCH_ASSOC</i> which returns an associative array.
 
 Here an example :
 
@@ -216,6 +216,7 @@ $person->Firstname = "Nhoj";
 $person->Age  = "20";
 $person->Sex = "F";
 $person->Id  = "4"; 
+// Returns affected rows
 $saved = $person->Save();
  
 //  Or give the bindings to the constructor
@@ -230,13 +231,16 @@ $saved = $person->Save();
 <?php
 // Find person
 $person->Id = "1";
-$person = $person->Find();
+$person->Find();
+
+echo $person->firstname;
+// Johny
  
 // Shorthand method, give id as parameter
-$person = $person->Find(1); 
+$person->Find(1); 
  
 // SQL Equivalent
-"SELECT * FROM persons WHERE Id= 1"
+"SELECT * FROM persons WHERE Id = 1"
 ```
 #### Getting all the persons
 ```php

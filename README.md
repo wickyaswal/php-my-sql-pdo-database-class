@@ -125,6 +125,22 @@ if($insert > 0 ) {
 }
 
 ```
+## Method parameters
+Every method which executes a query has the optional parameter called bindings.
+
+The <i>row</i> and the <i>query</i> method have a third optional parameter  which is the fetch style.
+The default fetch style is PDO::FETCH_ASSOC which returns an associative array.
+
+Here an example :
+
+```php
+<?php
+  // Fetch style as third parameter
+  $persons_num =     $db->query("SELECT * FROM Persons", null, PDO::FETCH_NUM);
+```
+More info about the PDO fetchstyle : http://php.net/manual/en/pdostatement.fetch.php
+
+
 EasyCRUD
 ============================
 The easyCRUD is a class which you can use to easily execute basic SQL operations like(insert, update, select, delete) on your database. 

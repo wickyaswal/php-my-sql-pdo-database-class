@@ -52,7 +52,10 @@ If you want to use these files you''ll have to modify the rights of the logs fol
 // Fetch whole table
 $persons = $db->query("SELECT * FROM persons");
 ```
-#### Fetching with Bindings:
+#### Fetching with Bindings (ANTI-SQL-INJECTION):
+Binding parameters is the best way to prevent SQL injection. The class prepares your SQL query and binds the parameters
+afterwards.
+
 There are three different ways to bind parameters.
 ```php
 <?php
@@ -136,7 +139,11 @@ Here an example :
 ```php
 <?php
   // Fetch style as third parameter
-  $persons_num =     $db->query("SELECT * FROM Persons", null, PDO::FETCH_NUM);
+  $person_num =     $db->row("SELECT * FROM Persons WHERE id = :id", array("id"=>"1"), PDO::FETCH_NUM);
+
+  print_r($person_num);
+  // Array ( [0] => 1 [1] => Johny [2] => Doe [3] => M [4] => 19 )
+    
 ```
 More info about the PDO fetchstyle : http://php.net/manual/en/pdostatement.fetch.php
 
@@ -150,7 +157,8 @@ Actually it's just a little ORM class.
 
 ## How to use easyCRUD
 #### 1. First, create a new class. Then require the easyCRUD class.
-#### 2. Extend your class and add the following fields to the class.
+#### 2. Extend your class to the base class Crud and add the following fields to the class.
+#### Example class :
 ```php
 <?php
 require_once("easyCRUD.class.php");

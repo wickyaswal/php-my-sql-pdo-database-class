@@ -3,10 +3,6 @@ PDO Database Class
 
 A database class for PHP-MySQL which uses the PDO extension.
 
-## Feature overview
-- Simple fetching 
-- Logger class 
-
 ## To use the class
 #### 1. Edit the database settings in the settings.ini.php
 ```
@@ -27,17 +23,18 @@ require("Db.class.php");
 // The instance
 $db = new Db();
 ```
-#### 4.  Logs - Modify the rights of the logs folder
+#### 4.  Logs - Modify the read/write rights of the root folder
+
 Everytime an exception is thrown by the database class a log file gets created or modified.
-These logs are stored in the logs directory.
+These logs are stored in the logs directory. Which means the database class needs write access for the logs folder.
+If the files are on a webserver you'll have to modify the rights of the root folder otherwise you'll get a "Permission denied" error.
 
 The log file is a simple plain text file with the current date('year-month-day') as filename.
 
-If you want to use these files you''ll have to modify the rights of the logs folder.
-
 ## Examples
-
-#### The table persons,
+Below some examples of the basic functions of the database class. I've included a SQL dump so you can easily test the database
+class functions. 
+#### The persons table 
 | id | firstname | lastname | sex | age
 |:-----------:|:------------:|:------------:|:------------:|:------------:|
 | 1       |        John |     Doe    | M | 19

@@ -212,7 +212,7 @@ $deleted     = $person->Delete(17);
 ```php
 <?php
 // Update personal data
-$person->Firstname = "Nhoj";
+$person->Firstname = "John";
 $person->Age  = "20";
 $person->Sex = "F";
 $person->Id  = "4"; 

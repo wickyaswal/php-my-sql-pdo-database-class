@@ -68,6 +68,9 @@ $person   =  $db->query("SELECT * FROM Persons WHERE firstname = :firstname AND 
 // 3. Or just give the parameters to the method
 $person   =  $db->query("SELECT * FROM Persons WHERE firstname = :firstname",array("firstname"=>"John","id"=>"1"));
 ```
+
+More about SQL injection prevention : http://indieteq.com/index/readmore/how-to-prevent-sql-injection-in-php
+
 #### Fetching Row:
 This method always returns only 1 row.
 ```php

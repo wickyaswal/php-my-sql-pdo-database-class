@@ -20,13 +20,29 @@
    $person->id = "4";		
    $person->Find();
 
-   echo $person->Firstname;
-   echo $person->Age;
-	
+   d($person->Firstname, "Person->Firstname");
+   d($person->Age, "Person->Age");
+
 // Delete person
    $person->id = "17";	
    $delete = $person->Delete();
 
  // Get all persons
    $persons = $person->all();  
+
+   // Aggregates methods 
+   d($person->max('age'), "Max person age");
+   d($person->min('age'), "Min person age");
+   d($person->sum('age'), "Sum persons age");
+   d($person->avg('age'), "Average persons age");
+   d($person->count('id'), "Count persons");
+
+   function d($v,$t) 
+   {
+      echo '<pre>';
+      echo '<h1>' . $t. '</h1>';
+      var_dump($v);
+      echo '</pre>';
+   }
+
 ?>

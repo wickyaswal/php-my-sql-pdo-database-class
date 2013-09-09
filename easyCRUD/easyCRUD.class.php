@@ -99,5 +99,31 @@ class Crud {
 	public function all(){
 		return $this->db->query("SELECT * FROM " . $this->table);
 	}
+	
+	public function min($field)  {
+		if($field)
+		return $this->db->single("SELECT min(" . $field . ")" . " FROM " . $this->table);
+	}
+
+	public function max($field)  {
+		if($field)
+		return $this->db->single("SELECT max(" . $field . ")" . " FROM " . $this->table);
+	}
+
+	public function avg($field)  {
+		if($field)
+		return $this->db->single("SELECT avg(" . $field . ")" . " FROM " . $this->table);
+	}
+
+	public function sum($field)  {
+		if($field)
+		return $this->db->single("SELECT sum(" . $field . ")" . " FROM " . $this->table);
+	}
+
+	public function count($field)  {
+		if($field)
+		return $this->db->single("SELECT count(" . $field . ")" . " FROM " . $this->table);
+	}	
+	
 }
 ?>

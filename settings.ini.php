@@ -1,3 +1,4 @@
+;<?php return; ?>
 [SQL]
 host = localhost
 user = root

@@ -111,7 +111,7 @@ class DB
 			catch(PDOException $e)
 			{
 					# Write into log and display Exception
-					echo $this->ExceptionLog($e->getMessage(),$this->sQuery->queryString);
+					echo $this->ExceptionLog($e->getMessage(), $query );
 					die();
 			}
 
@@ -169,7 +169,16 @@ class DB
 			else {
 				return NULL;
 			}
-		}		
+		}
+		
+      /**
+       *  Returns the last inserted id.
+       *  @return string
+       */	
+		public function lastInsertId() {
+			return $this->pdo->lastInsertId();
+		}	
+		
        /**
 	*	Returns an array which represents a column from the result set 
 	*

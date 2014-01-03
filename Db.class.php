@@ -79,7 +79,7 @@ class DB
 	 *   You can use this little method if you want to close the PDO connection
 	 *
 	 */
-	 	private function CloseConnection()
+	 	public function CloseConnection()
 	 	{
 	 		# Set the PDO object to null to close the connection
 	 		# http://www.php.net/manual/en/pdo.connections.php

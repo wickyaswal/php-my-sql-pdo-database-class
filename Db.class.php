@@ -56,8 +56,8 @@ class DB
 			$dsn = 'mysql:dbname='.$this->settings["dbname"].';host='.$this->settings["host"].'';
 			try 
 			{
-				# Read settings from INI file
-				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"]);
+				# Read settings from INI file, set UTF8
+				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 				
 				# We can now log any exceptions on Fatal error. 
 				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -165,16 +165,19 @@ class DB
 	*	@param  int    $fetchmode
 	*	@return mixed
 	*/			
-		public function query($query,$params = null,$fetchmode = PDO::FETCH_ASSOC)
+		public function query($query,$params = null, $fetchmode = PDO::FETCH_ASSOC)
 		{
 			$query = trim($query);
 
 			$this->Init($query,$params);
 
-			if (stripos($query, 'select') === 0){
+			# Assuming there are spaces in the query. Otherwise it would be an invalid query.
+			$statement = strtolower(substr($query, 0 , 6));
+			
+			if ($statement === 'select') {
 				return $this->sQuery->fetchAll($fetchmode);
 			}
-			elseif (stripos($query, 'insert') === 0 ||  stripos($query, 'update') === 0 || stripos($query, 'delete') === 0) {
+			elseif ( $statement === 'insert' ||  $statement === 'update' || $statement === 'delete' ) {
 				return $this->sQuery->rowCount();	
 			}	
 			else {

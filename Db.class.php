@@ -171,7 +171,7 @@ class DB
 
 			$this->Init($query,$params);
 
-			# Assuming there are spaces in the query. Otherwise it would be an invalid query.
+			# The first six letters of the sql statement -> insert, select, etc...
 			$statement = strtolower(substr($query, 0 , 6));
 			
 			if ($statement === 'select') {

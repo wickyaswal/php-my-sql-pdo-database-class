@@ -7,9 +7,10 @@ If you have any questions go to : http://indieteq.com/index/readmore/how-to-prev
 
 ## To use the class
 #### 1. Edit the database settings in the settings.ini.php
+### Note if PDO is loading slow change localhost to -> 127.0.0.1 !
 ```
 [SQL]
-host = localhost
+host = 127.0.0.1
 user = root
 password = 
 dbname = yourdatabase

@@ -254,3 +254,7 @@ $persons = $person->all();
 // SQL Equivalent
 "SELECT * FROM persons 
 ```
+
+## Copyright and license
+#### Code released under Beerware
+

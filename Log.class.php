@@ -2,7 +2,7 @@
        /* *
 	* Log 			A logger class which creates logs when an exception is thrown.
 	* @author		Author: Vivek Wicky Aswal. (https://twitter.com/#!/VivekWickyAswal)
-	* @git 			https://github.com/indieteq-vivek/PHP-MySQL-PDO-Database-Class
+	* @git 			https://github.com/indieteq/PHP-MySQL-PDO-Database-Class
 	* @version      0.1a
 	*/
 	class Log {

@@ -157,7 +157,7 @@ class DB
 			}
 		}
        /**
-	*   	If the SQL query  contains a SELECT statement it returns an array containing all of the result set row
+	*   	If the SQL query  contains a SELECT or SHOW statement it returns an array containing all of the result set row
 	*	If the SQL statement is a DELETE, INSERT, or UPDATE statement it returns the number of affected rows
 	*
 	*   	@param  string $query
@@ -171,8 +171,9 @@ class DB
 
 			$this->Init($query,$params);
 
-			# The first six letters of the sql statement -> insert, select, etc...
-			$rawStatement = explode(" ",$query);
+			$rawStatement = explode(" ", $query);
+			
+			# Which SQL statement is used 
 			$statement = strtolower($rawStatement[0]);
 			
 			if ($statement === 'select' || $statement === 'show') {

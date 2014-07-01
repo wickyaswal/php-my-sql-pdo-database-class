@@ -172,9 +172,10 @@ class DB
 			$this->Init($query,$params);
 
 			# The first six letters of the sql statement -> insert, select, etc...
-			$statement = strtolower(substr($query, 0 , 6));
+			$rawStatement = explode(" ",$query);
+			$statement = strtolower($rawStatement[0]);
 			
-			if ($statement === 'select') {
+			if ($statement === 'select' || $statement === 'show') {
 				return $this->sQuery->fetchAll($fetchmode);
 			}
 			elseif ( $statement === 'insert' ||  $statement === 'update' || $statement === 'delete' ) {

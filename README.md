@@ -193,7 +193,7 @@ $created            = $person->Create();
  
 //  Or give the bindings to the constructor
 $person  = new person(array("Firstname"=>"Kona","age"=>"20","sex"=>"F"));
-$created = person->Create();
+$created = $person->Create();
  
 // SQL Equivalent
 "INSERT INTO persons (Firstname,Age,Sex) VALUES ('Kona','20','F')"

@@ -167,7 +167,7 @@ class DB
 	*/			
 		public function query($query,$params = null, $fetchmode = PDO::FETCH_ASSOC)
 		{
-			$query = trim($query);
+			$query = trim(str_replace("\r", " ", $query));
 
 			$this->Init($query,$params);
 

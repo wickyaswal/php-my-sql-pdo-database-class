@@ -227,7 +227,10 @@ class DB
 		public function row($query,$params = null,$fetchmode = PDO::FETCH_ASSOC)
 		{				
 			$this->Init($query,$params);
-			return $this->sQuery->fetch($fetchmode);			
+			// return $this->sQuery->fetch($fetchmode);
+			$result  = $this->sQuery->fetch($fetchmode);
+			$this->sQuery->closeCursor(); //frees up the connection to the server so that other SQL statements may be issued,
+			return $result;	
 		}
        /**
 	*	Returns the value of one single field/column
@@ -239,7 +242,10 @@ class DB
 		public function single($query,$params = null)
 		{
 			$this->Init($query,$params);
-			return $this->sQuery->fetchColumn();
+			// return $this->sQuery->fetchColumn();
+			$result = $this->sQuery->fetchColumn();
+			$this->sQuery->closeCursor(); //frees up the connection to the server so that other SQL statements may be issued
+			return $result;	
 		}
        /**	
 	* Writes the log and returns the exception

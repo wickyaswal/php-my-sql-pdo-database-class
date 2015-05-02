@@ -32,16 +32,26 @@ class DB
 	*   Default Constructor 
 	*
 	*	1. Instantiate Log class.
-	*	2. Connect to database.
-	*	3. Creates the parameter array.
+	* 	2. Decode base64 password in settings.ini.php
+	*	3. Connect to database.
+	*	4. Creates the parameter array.
 	*/
 		public function __construct()
 		{ 			
-			$this->log = new Log();	
+			$this->log = new Log();
+			$this->Decode();
 			$this->Connect();
 			$this->parameters = array();
 		}
-	
+	       /**
+	*	This method decode base64 password in settings.ini.php
+	*/
+		private function Decode(){
+		
+		$this->settings = parse_ini_file("/../config/settings.ini.php");
+		$this->settings['pass'] = base64_decode(base64_decode($this->_settings['pass']));
+		return $this->settings['pass'];
+		}
        /**
 	*	This method makes connection to the database.
 	*	
@@ -52,7 +62,6 @@ class DB
 	*/
 		private function Connect()
 		{
-			$this->settings = parse_ini_file("settings.ini.php");
 			$dsn = 'mysql:dbname='.$this->settings["dbname"].';host='.$this->settings["host"].'';
 			try 
 			{

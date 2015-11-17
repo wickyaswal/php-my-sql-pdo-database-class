@@ -139,7 +139,11 @@ class DB
 	*/	
 		public function bind($para, $value)
 		{	
-			$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . utf8_encode($value);
+			//if the $value is already in UTF-8 do not use utf8_encode or it may cause a issue of chinese garbled.
+            		if(mb_detect_encoding($value) != 'UTF-8')
+                		$value = utf8_encode($value);
+
+			$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . $value;
 		}
        /**
 	*	@void

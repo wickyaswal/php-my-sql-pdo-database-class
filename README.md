@@ -234,13 +234,13 @@ $saved = $person->Save();
 <?php
 // Find person
 $person->Id = "1";
-$person->Find();
+$person->find();
 
-echo $person->firstname;
+echo $person->Firstname;
 // Johny
  
 // Shorthand method, give id as parameter
-$person->Find(1); 
+$person->find(1); 
  
 // SQL Equivalent
 "SELECT * FROM persons WHERE Id = 1"

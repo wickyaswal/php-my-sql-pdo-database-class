@@ -1,5 +1,5 @@
 {
-    "name": "Indieteq/PHP-MySQL-PDO-Database-Class",
+    "name": "indieteq-php-my-sql-pdo-database-class",
     "require": {
         "php": ">=5.3.0"
     }

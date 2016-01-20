@@ -43,6 +43,7 @@ class Crud {
 		return null;
 	}
 
+
 	public function save($id = "0") {
 		$this->variables[$this->pk] = (empty($this->variables[$this->pk])) ? $id : $this->variables[$this->pk];
 
@@ -58,9 +59,17 @@ class Crud {
 		$fieldsvals = substr_replace($fieldsvals , '', -1);
 
 		if(count($columns) > 1 ) {
+
 			$sql = "UPDATE " . $this->table .  " SET " . $fieldsvals . " WHERE " . $this->pk . "= :" . $this->pk;
-			return $this->db->query($sql,$this->variables);
+			if($id === "0" && $this->variables[$this->pk] === "0") { 
+				unset($this->variables[$this->pk]);
+				$sql = "UPDATE " . $this->table .  " SET " . $fieldsvals;
+			}
+
+			return $this->exec($sql);
 		}
+
+		return null;
 	}
 
 	public function create() { 
@@ -75,7 +84,7 @@ class Crud {
 			$sql 		= "INSERT INTO ".$this->table." () VALUES ()";
 		}
 
-		return $this->db->query($sql,$bindings);
+		return $this->exec($sql);
 	}
 
 	public function delete($id = "") {
@@ -83,8 +92,9 @@ class Crud {
 
 		if(!empty($id)) {
 			$sql = "DELETE FROM " . $this->table . " WHERE " . $this->pk . "= :" . $this->pk. " LIMIT 1" ;
-			return $this->db->query($sql,array($this->pk=>$id));
 		}
+
+		return $this->exec($sql, array($this->pk=>$id));
 	}
 
 	public function find($id = "") {
@@ -92,7 +102,7 @@ class Crud {
 
 		if(!empty($id)) {
 			$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";	
-			$this->variables = $this->db->row($sql,array($this->pk=>$id));
+			$this->variables = $this->db->row($sql, array($this->pk=>$id));
 		}
 	}
 
@@ -125,5 +135,23 @@ class Crud {
 		return $this->db->single("SELECT count(" . $field . ")" . " FROM " . $this->table);
 	}	
 	
+
+	private function exec($sql, $array = null) {
+		
+		if($array !== null) {
+			// Get result with the DB object
+			$result =  $this->db->query($sql, $array);	
+		}
+		else {
+			// Get result with the DB object
+			$result =  $this->db->query($sql, $this->variables);	
+		}
+		
+		// Empty bindings
+		$this->variables = array();
+
+		return $result;
+	}
+
 }
 ?>

@@ -45,16 +45,16 @@
 	// Delete statement
 //	$delete	 	=  $db->query("DELETE FROM Persons WHERE Id = :id",array("id"=>"6")); 
 	
-	function d($v,$t) 
+	function d($v, $t = "") 
 	{
 		echo '<pre>';
 		echo '<h1>' . $t. '</h1>';
 		var_dump($v);
 		echo '</pre>';
 	}
-	d($person, "All persons");
-	d($firstname, "Fetch Single value, The firstname");
+	//d($person, "All persons");
 	d($id_age, "Single Row, Id and Age");
+	d($firstname, "Fetch Single value, The firstname");
 	d($ages, "Fetch Column, Numeric Index");
 
 ?>

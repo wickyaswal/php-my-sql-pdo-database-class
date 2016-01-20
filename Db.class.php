@@ -237,7 +237,7 @@ class DB
 	*   	@param  int    $fetchmode
 	*	@return array
 	*/	
-		public function row($query,$params = null,$fetchmode = PDO::FETCH_ASSOC)
+		public function row($query,$params = null, $fetchmode = PDO::FETCH_ASSOC)
 		{				
 			$this->Init($query,$params);
 			$result  = $this->sQuery->fetch($fetchmode);

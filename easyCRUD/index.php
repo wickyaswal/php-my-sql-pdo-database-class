@@ -37,7 +37,7 @@
    d($person->avg('age'), "Average persons age");
    d($person->count('id'), "Count persons");
 
-   function d($v,$t) 
+   function d($v, $t = "") 
    {
       echo '<pre>';
       echo '<h1>' . $t. '</h1>';

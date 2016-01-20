@@ -34,12 +34,6 @@ class Crud {
 			}
 		}
 
-		$trace = debug_backtrace();
-		trigger_error(
-		'Undefined property via __get(): ' . $name .
-		' in ' . $trace[0]['file'] .
-		' on line ' . $trace[0]['line'],
-		E_USER_NOTICE);
 		return null;
 	}
 
@@ -102,7 +96,9 @@ class Crud {
 
 		if(!empty($id)) {
 			$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";	
-			$this->variables = $this->db->row($sql, array($this->pk=>$id));
+			
+			$result = $this->db->row($sql, array($this->pk=>$id));
+			$this->variables = ($result != false) ? $result : null;
 		}
 	}
 	/**
@@ -137,7 +133,7 @@ class Crud {
 			}
 			$sql .= " ORDER BY " . implode(", ", $sortvals);
 		}
-		return $this->db->query($sql, $bindings);
+		return $this->exec($sql);
 	}
 
 	public function all(){

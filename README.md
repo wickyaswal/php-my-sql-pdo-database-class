@@ -3,6 +3,10 @@ PDO Database Class
 
 A database class for PHP-MySQL which uses the PDO extension.
 
+### To-do
+#### 1. PSR-0 / PSR-1 coding standards
+#### 2. Use namespaces
+
 If you have any questions go to : http://indieteq.com/index/readmore/how-to-prevent-sql-injection-in-php
 
 ## To use the class

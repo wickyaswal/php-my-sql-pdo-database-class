@@ -76,6 +76,41 @@ class DB
 			}
 		}
 	/*
+	*   Start of Transaction 
+	*
+	*   Usage   try {
+	*	    	$db->StartTransaction();
+	*			$code and sql query;
+	*			$db->ExecuteTransaction();
+	*		}
+	*		catch (Exception $e) {
+        *   			$db->RollbackTransaction();
+        *    			echo 'Exception: ',  $e->getMessage(), "\n";
+	*		}
+	*	    
+	*	
+	*	
+	*/
+		public function StartTransaction(){
+            		return $this->pdo->beginTransaction();
+        	}
+
+        /*
+         *   EExecute Transaction
+         */
+        	public function ExecuteTransaction(){
+            		return $this->pdo->commit();
+	        }
+
+        /*
+         *   Rollback of Transaction
+         */
+        	public function RollbackTransaction(){
+            		return $this->pdo->rollBack();
+        	}
+		
+		
+	/*
 	 *   You can use this little method if you want to close the PDO connection
 	 *
 	 */

@@ -109,15 +109,13 @@ class DB
 
 				# Bind parameters
 				if(!empty($this->parameters)) {
-					foreach($this->parameters as $param)
-					{
-						$parameters = explode("\x7F",$param);
-						$this->sQuery->bindParam($parameters[0],$parameters[1]);
+					foreach($this->parameters as $param) {
+						$this->sQuery->bindParam($param[0], $param[1]);
 					}		
 				}
 
 				# Execute SQL 
-				$this->succes 	= $this->sQuery->execute();		
+				$this->sQuery->execute();		
 			}
 			catch(PDOException $e)
 			{
@@ -139,7 +137,7 @@ class DB
 	*/	
 		public function bind($para, $value)
 		{	
-			$this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . utf8_encode($value);
+			$this->parameters[sizeof($this->parameters)] = [":" . $para , $value];
 		}
        /**
 	*	@void

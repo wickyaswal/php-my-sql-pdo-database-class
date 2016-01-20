@@ -225,9 +225,8 @@ class DB
 		public function row($query,$params = null,$fetchmode = PDO::FETCH_ASSOC)
 		{				
 			$this->Init($query,$params);
-			// return $this->sQuery->fetch($fetchmode);
 			$result  = $this->sQuery->fetch($fetchmode);
-			$this->sQuery->closeCursor(); //frees up the connection to the server so that other SQL statements may be issued,
+			$this->sQuery->closeCursor(); // Frees up the connection to the server so that other SQL statements may be issued,
 			return $result;	
 		}
        /**
@@ -240,9 +239,8 @@ class DB
 		public function single($query,$params = null)
 		{
 			$this->Init($query,$params);
-			// return $this->sQuery->fetchColumn();
 			$result = $this->sQuery->fetchColumn();
-			$this->sQuery->closeCursor(); //frees up the connection to the server so that other SQL statements may be issued
+			$this->sQuery->closeCursor(); // Frees up the connection to the server so that other SQL statements may be issued
 			return $result;	
 		}
        /**	

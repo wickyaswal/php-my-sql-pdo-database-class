@@ -10,10 +10,14 @@
 		    # @string, Log directory name
 		    	private $path = '/logs/';
 			
+			# @string, ini section name
+			private $section;
+					
 		    # @void, Default Constructor, Sets the timezone and path of the log files.
-			public function __construct() {
+			public function __construct($section = "SQL") {
 				date_default_timezone_set('Europe/Amsterdam');	
 				$this->path  = dirname(__FILE__)  . $this->path;	
+				$this->section = $section;
 			}
 			
 		   /**
@@ -36,7 +40,7 @@
 				if(is_dir($this->path)) {
 					if(!file_exists($log)) {
 						$fh  = fopen($log, 'a+') or die("Fatal Error !");
-						$logcontent = "Time : " . $date->format('H:i:s')."\r\n" . $message ."\r\n";
+						$logcontent = "Time : " . $date->format('H:i:s'). " (" . $this->section . ")\r\n" . $message ."\r\n";
 						fwrite($fh, $logcontent);
 						fclose($fh);
 					}
@@ -62,7 +66,7 @@
 			 * @param string $message
 			 */
 			    private function edit($log,$date,$message) {
-				$logcontent = "Time : " . $date->format('H:i:s')."\r\n" . $message ."\r\n\r\n";
+				$logcontent = "Time : " . $date->format('H:i:s'). " (" . $this->section . ")\r\n" . $message ."\r\n\r\n";
 				$logcontent = $logcontent . file_get_contents($log);
 				file_put_contents($log, $logcontent);
 			    }

@@ -25,19 +25,24 @@ class DB
 	# @object, Object for logging exceptions	
 	private $log;
 
+	# @string, ini section name
+	private $section;
+	
 	# @array, The parameters of the SQL query
 	private $parameters;
 		
        /**
 	*   Default Constructor 
 	*
+	*	0. Set ini section name (optional).
 	*	1. Instantiate Log class.
 	*	2. Connect to database.
 	*	3. Creates the parameter array.
 	*/
-		public function __construct()
-		{ 			
-			$this->log = new Log();	
+		public function __construct($section = "SQL")
+		{
+			$this->section = $section;
+			$this->log = new Log($section);	
 			$this->Connect();
 			$this->parameters = array();
 		}
@@ -52,12 +57,17 @@ class DB
 	*/
 		private function Connect()
 		{
-			$this->settings = parse_ini_file("settings.ini.php");
-			$dsn = 'mysql:dbname='.$this->settings["dbname"].';host='.$this->settings["host"].'';
+			$this->settings = parse_ini_file("settings.ini.php", true);
 			try 
 			{
+				if (!array_key_exists($this->section, $this->settings))
+				{
+					throw new Exception("Section [" . $this->section . "] is not found in config");
+				}
+				$dsn = 'mysql:dbname='.$this->settings[$this->section]["dbname"].';host='.$this->settings[$this->section]["host"].'';
+
 				# Read settings from INI file, set UTF8
-				$this->pdo = new PDO($dsn, $this->settings["user"], $this->settings["password"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+				$this->pdo = new PDO($dsn, $this->settings[$this->section]["user"], $this->settings[$this->section]["password"], array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 				
 				# We can now log any exceptions on Fatal error. 
 				$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -252,7 +262,7 @@ class DB
 	*/
 	private function ExceptionLog($message , $sql = "")
 	{
-		$exception  = 'Unhandled Exception. <br />';
+		$exception  = 'Unhandled Exception. (' . $this->section . ')<br />';
 		$exception .= $message;
 		$exception .= "<br /> You can find the error back in the log.";
 

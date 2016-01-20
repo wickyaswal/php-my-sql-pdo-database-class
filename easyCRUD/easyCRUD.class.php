@@ -105,6 +105,40 @@ class Crud {
 			$this->variables = $this->db->row($sql, array($this->pk=>$id));
 		}
 	}
+	/**
+	* @param array $fields.
+	* @param array $sort.
+	* @return array of Collection.
+	* Example: $user = new User;
+	* $found_user_array = $user->search(array('sex' => 'Male', 'age' => '18'), array('dob' => 'DESC'));
+	* // Will produce: SELECT * FROM {$this->table_name} WHERE sex = :sex AND age = :age ORDER BY dob DESC;
+	* // And rest is binding those params with the Query. Which will return an array.
+	* // Now we can use for each on $found_user_array.
+	* Other functionalities ex: Support for LIKE, >, <, >=, <= ... Are not yet supported.
+	*/
+	public function search($fields = array(), $sort = array()) {
+		$bindings = empty($fields) ? $this->variables : $fields;
+
+		$sql = "SELECT * FROM " . $this->table;
+
+		if (!empty($bindings)) {
+			$fieldsvals = array();
+			$columns = array_keys($bindings);
+			foreach($columns as $column) {
+				$fieldsvals [] = $column . " = :". $column;
+			}
+			$sql .= " WHERE " . implode(" AND ", $fieldsvals);
+		}
+		
+		if (!empty($sort)) {
+			$sortvals = array();
+			foreach ($sort as $key => $value) {
+				$sortvals[] = $key . " " . $value;
+			}
+			$sql .= " ORDER BY " . implode(", ", $sortvals);
+		}
+		return $this->db->query($sql, $bindings);
+	}
 
 	public function all(){
 		return $this->db->query("SELECT * FROM " . $this->table);

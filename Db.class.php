@@ -109,8 +109,23 @@ class DB
 
 				# Bind parameters
 				if(!empty($this->parameters)) {
-					foreach($this->parameters as $param) {
-						$this->sQuery->bindParam($param[0], $param[1]);
+					foreach($this->parameters as $param => $value) {
+
+						$type = PDO::PARAM_STR;
+						switch ($value[1]) 
+						{
+	                        case is_int($value[1]):
+	                            $type = PDO::PARAM_INT;
+	                            break;
+	                        case is_bool($value[1]):
+	                            $type = PDO::PARAM_BOOL;
+	                            break;
+	                        case is_null($value[1]):
+	                            $type = PDO::PARAM_NULL;
+	                            break;
+                    	}
+                    	// Add type when binding the values to the column
+                    	$this->sQuery->bindValue($value[0], $value[1], $type);
 					}		
 				}
 
@@ -167,10 +182,10 @@ class DB
 		{
 			$query = trim(str_replace("\r", " ", $query));
 
-			$this->Init($query,$params);
+			$this->Init($query, $params);
 
-			$rawStatement = explode(" ", $query);
-			
+			$rawStatement = explode(" ", preg_replace("/\s+|\t+|\n+/", " ", $query));
+
 			# Which SQL statement is used 
 			$statement = strtolower($rawStatement[0]);
 			

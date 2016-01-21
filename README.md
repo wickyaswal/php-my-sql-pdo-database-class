@@ -101,6 +101,19 @@ $firstname = $db->single("SELECT firstname FROM Persons WHERE id = :id");
 |firstname
 |:------------:
 | Zoe
+
+#### Using the like keyword
+```php
+<?php
+// Using Like 
+// Notice the wildcard at the end of the value!!
+$like = $db->query("SELECT * FROM Persons WHERE Firstname LIKE :firstname ", array("firstname"=>"sekit%"));
+```
+##### Result
+| id | firstname | lastname | sex | age
+|:-----------:|:------------:|:------------:|:------------:|:------------:|
+| 4       |        Sekito |     Khan | M | 19
+
 #### Fetching Column:
 ```php
 <?php

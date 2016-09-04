@@ -221,13 +221,12 @@ $created = $person->Create();
 <?php
 // Delete person
 $person->Id  = "17";
+$person->Name = "Thomas";
 $deleted     = $person->Delete();
  
-// Shorthand method, give id as parameter
-$deleted     = $person->Delete(17);
  
 // SQL Equivalent
-"DELETE FROM persons WHERE Id = 17 LIMIT 1"
+"DELETE FROM persons WHERE Id = 17 AND Name = 'Thomas'"
 ```
 #### Saving person's data
 ```php

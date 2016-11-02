@@ -94,13 +94,15 @@ class Crud {
 	public function find($id = "") {
 		$id = (empty($this->variables[$this->pk])) ? $id : $this->variables[$this->pk];
 
-		if(!empty($id)) {
-			$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";	
-			
-			$result = $this->db->row($sql, array($this->pk=>$id));
-			$this->variables = ($result != false) ? $result : null;
+		if(empty($id)) {
+			return false
 		}
+		
+		$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";	
+
+		return $this->variables = $this->db->row($sql, array($this->pk=>$id));
 	}
+	
 	/**
 	* @param array $fields.
 	* @param array $sort.

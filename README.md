@@ -4,34 +4,39 @@ PDO Database Class
 A database class for PHP-MySQL which uses the PDO extension.
 
 ### To-do
-#### 1. PSR-0 / PSR-1 coding standards
-#### 2. Use namespaces
-#### 3. Dependency Injection / Testability
+#### 1. Dependency Injection / Testability
 
 If you have any questions go to : http://indieteq.com/index/readmore/how-to-prevent-sql-injection-in-php
 
 ## To use the class
-#### 1. Edit the database settings in the settings.ini.php
+#### 1. Run ```composer install``` from the terminal to generate the ```vendor/autoload.php``` file
+
+#### 2. Edit the database settings in the settings.ini.php
 ### Note if PDO is loading slow change localhost to -> 127.0.0.1 !
 ```
 [SQL]
 host = 127.0.0.1
 user = root
-password = 
+password = root
 dbname = yourdatabase
 ```
-#### 2. Require the class in your project
+#### 3. Require the composer autoload file
 ```php
 <?php
-require("Db.class.php");
+require "vendor/autoload.php";
 ```
-#### 3. Create the instance 
+
+### 4. import db class with use
+```php
+use Indieteq\PDO\DB;
+```
+#### 5. Create the instance 
 ```php
 <?php
 // The instance
 $db = new Db();
 ```
-#### 4.  Logs - Modify the read/write rights of the root folder
+#### 6.  Logs - Modify the read/write rights of the root folder
 
 Everytime an exception is thrown by the database class a log file gets created or modified.
 These logs are stored in the logs directory. Which means the database class needs write access for the logs folder.
@@ -177,13 +182,15 @@ It uses the database class I've created to execute the SQL queries.
 Actually it's just a little ORM class.
 
 ## How to use easyCRUD
-#### 1. First, create a new class. Then require the easyCRUD class.
+#### 1. First, create a new class. Then import the easyCRUD class with use.
 #### 2. Extend your class to the base class Crud and add the following fields to the class.
 #### Example class :
 ```php
 <?php
-require_once("easyCRUD.class.php");
- 
+namespace Indieteq\PDO\easyCrud;
+
+use Indieteq\PDO\easyCrud\Crud;
+
 class YourClass  Extends Crud {
  
   # The table you want to perform the database actions on

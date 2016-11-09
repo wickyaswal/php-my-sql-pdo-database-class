@@ -23,7 +23,7 @@ dbname = yourdatabase
 #### 2. Require the class in your project
 ```php
 <?php
-require("Db.class.php");
+require("Db.php");
 ```
 #### 3. Create the instance 
 ```php
@@ -182,7 +182,7 @@ Actually it's just a little ORM class.
 #### Example class :
 ```php
 <?php
-require_once("easyCRUD.class.php");
+require_once("EasyCrud.php");
  
 class YourClass  Extends Crud {
  

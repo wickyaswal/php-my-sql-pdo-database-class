@@ -1,14 +1,20 @@
 {
-    "name": "indieteq/indieteq-php-my-sql-pdo-database-class",
-    "description": "A database class for MySQL with PDO",
-    "type": "library",
-    "keywords": [ "mysql", "pdo", "php", "beer", "free" ],
-    "homepage": "https://github.com/indieteq/indieteq-php-my-sql-pdo-database-class",
-    "license": "Beerware",
-    "authors": [
-        { "name": "wicky", "email": "info@wickyaswal.com" }
-    ],
-    "require": {
-         "php": ">=5.3.0"
+  "name": "jrw2252/php-pdo-mysql",
+  "description": "PHP PDO Class to use with MySQL databases",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "JRW2252"
     }
+  ],
+  "require": {
+    "monolog/monolog": "^1.21",
+    "php-console/php-console": "^3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "JRW\\MySQL\\": "src/"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <?php
-	require("Db.class.php");
+	require("Db.php");
 
 	// Creates the instance
 	$db = new Db();

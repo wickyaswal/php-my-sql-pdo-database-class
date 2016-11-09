@@ -182,7 +182,7 @@ Actually it's just a little ORM class.
 #### Example class :
 ```php
 <?php
-require_once("easyCRUD.class.php");
+require_once("EasyCrud.php");
  
 class YourClass  Extends Crud {
  

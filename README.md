@@ -23,7 +23,7 @@ dbname = yourdatabase
 #### 2. Require the class in your project
 ```php
 <?php
-require("Db.class.php");
+require("Db.php");
 ```
 #### 3. Create the instance 
 ```php

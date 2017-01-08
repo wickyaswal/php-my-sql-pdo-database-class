@@ -8,8 +8,6 @@ A database class for PHP-MySQL which uses the PDO extension.
 #### 2. Use namespaces
 #### 3. Dependency Injection / Testability
 
-If you have any questions go to : http://indieteq.com/index/readmore/how-to-prevent-sql-injection-in-php
-
 ## To use the class
 #### 1. Edit the database settings in the settings.ini.php
 ### Note if PDO is loading slow change localhost to -> 127.0.0.1 !

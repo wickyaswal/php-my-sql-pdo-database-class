@@ -1,12 +1,10 @@
+I am not maintaining this repository anymore and I would like to request you to find a better repo or make a fork of this repository!
+============================
+
 PDO Database Class
 ============================
 
 A database class for PHP-MySQL which uses the PDO extension.
-
-### To-do
-#### 1. PSR-0 / PSR-1 coding standards
-#### 2. Use namespaces
-#### 3. Dependency Injection / Testability
 
 ## To use the class
 #### 1. Edit the database settings in the settings.ini.php

@@ -81,14 +81,20 @@ class Crud {
 		return $this->exec($sql);
 	}
 
-	public function delete($id = "") {
-		$id = (empty($this->variables[$this->pk])) ? $id : $this->variables[$this->pk];
+	public function delete($fields = array()) {
+		$bindings = empty($fields) ? $this->variables : $fields;
 
-		if(!empty($id)) {
-			$sql = "DELETE FROM " . $this->table . " WHERE " . $this->pk . "= :" . $this->pk. " LIMIT 1" ;
+		$sql = "DELETE FROM " . $this->table;
+
+		if (!empty($bindings)) {
+			$fieldsvals = array();
+			$columns = array_keys($bindings);
+			foreach($columns as $column) {
+				$fieldsvals [] = $column . " = :". $column;
+			}
+			$sql .= " WHERE " . implode(" AND ", $fieldsvals);
 		}
-
-		return $this->exec($sql, array($this->pk=>$id));
+		return $this->exec($sql);
 	}
 
 	public function find($id = "") {

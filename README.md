@@ -1,31 +1,31 @@
-I am not maintaining this repository anymore and I would like to request you to find a better repo or make a fork of this repository!
-============================
-
 PDO Database Class
 ============================
 
-A database class for PHP-MySQL which uses the PDO extension.
+A PHP PDO class for multi database Connections.
 
 ## To use the class
-#### 1. Edit the database settings in the settings.ini.php
+#### 1. Edit the database settings in the Setting.class.php
 ### Note if PDO is loading slow change localhost to -> 127.0.0.1 !
+### choose your database connection engine function sqlserv or mysql
 ```
-[SQL]
-host = 127.0.0.1
-user = root
-password = 
-dbname = yourdatabase
+return [
+            'connectionString' => "sqlsrv:Server=localhost,1433;Database=auth;ConnectionPooling=0",
+            'username'=>"sa",
+            'password'=>'123',
+            'pdo_setting'=>[ PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8" ]
+       ]
 ```
-#### 2. Require the class in your project
+#### 2. Require the class in your project and Setting class
 ```php
 <?php
 require("Db.class.php");
+require("Setting.class.php");
 ```
 #### 3. Create the instance 
 ```php
 <?php
 // The instance
-$db = new Db();
+$db = new Db(Setting::mysql());
 ```
 #### 4.  Logs - Modify the read/write rights of the root folder
 

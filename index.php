@@ -1,8 +1,9 @@
 <?php
 	require("Db.class.php");
+	require("Setting.class.php");
 
 	// Creates the instance
-	$db = new Db();
+	$db = new Db(Setting::sqlsrv());
 		
 	// 3 ways to bind parameters :		
 	

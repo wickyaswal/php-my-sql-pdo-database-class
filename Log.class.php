@@ -35,7 +35,7 @@
 
 				if(is_dir($this->path)) {
 					if(!file_exists($log)) {
-						$fh  = fopen($log, 'a+') or die("Fatal Error !");
+						$fh  = fopen($log, 'w+') or die("Fatal Error !");
 						$logcontent = "Time : " . $date->format('H:i:s')."\r\n" . $message ."\r\n";
 						fwrite($fh, $logcontent);
 						fclose($fh);

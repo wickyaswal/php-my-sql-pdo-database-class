@@ -1,6 +1,6 @@
-<?php 
+<?php
 /**
-* Easy Crud  -  This class kinda works like ORM. Just created for fun :) 
+* Easy Crud  -  This class kinda works like ORM. Just created for fun :)
 *
 * @author		Author: Vivek Wicky Aswal. (https://twitter.com/#!/VivekWickyAswal)
 * @version      0.1a
@@ -13,7 +13,7 @@ class Crud {
 	public $variables;
 
 	public function __construct($data = array()) {
-		$this->db =  new DB();	
+		$this->db =  new DB();
 		$this->variables  = $data;
 	}
 
@@ -27,7 +27,7 @@ class Crud {
 	}
 
 	public function __get($name)
-	{	
+	{
 		if(is_array($this->variables)) {
 			if(array_key_exists($name,$this->variables)) {
 				return $this->variables[$name];
@@ -55,7 +55,7 @@ class Crud {
 		if(count($columns) > 1 ) {
 
 			$sql = "UPDATE " . $this->table .  " SET " . $fieldsvals . " WHERE " . $this->pk . "= :" . $this->pk;
-			if($id === "0" && $this->variables[$this->pk] === "0") { 
+			if($id === "0" && $this->variables[$this->pk] === "0") {
 				unset($this->variables[$this->pk]);
 				$sql = "UPDATE " . $this->table .  " SET " . $fieldsvals;
 			}
@@ -66,7 +66,7 @@ class Crud {
 		return null;
 	}
 
-	public function create() { 
+	public function create() {
 		$bindings   	= $this->variables;
 
 		if(!empty($bindings)) {
@@ -95,8 +95,8 @@ class Crud {
 		$id = (empty($this->variables[$this->pk])) ? $id : $this->variables[$this->pk];
 
 		if(!empty($id)) {
-			$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";	
-			
+			$sql = "SELECT * FROM " . $this->table ." WHERE " . $this->pk . "= :" . $this->pk . " LIMIT 1";
+
 			$result = $this->db->row($sql, array($this->pk=>$id));
 			$this->variables = ($result != false) ? $result : null;
 		}
@@ -125,7 +125,7 @@ class Crud {
 			}
 			$sql .= " WHERE " . implode(" AND ", $fieldsvals);
 		}
-		
+
 		if (!empty($sort)) {
 			$sortvals = array();
 			foreach ($sort as $key => $value) {
@@ -133,13 +133,13 @@ class Crud {
 			}
 			$sql .= " ORDER BY " . implode(", ", $sortvals);
 		}
-		return $this->exec($sql);
+		return $this->exec($sql, $bindings);
 	}
 
 	public function all(){
 		return $this->db->query("SELECT * FROM " . $this->table);
 	}
-	
+
 	public function min($field)  {
 		if($field)
 		return $this->db->single("SELECT min(" . $field . ")" . " FROM " . $this->table);
@@ -163,20 +163,20 @@ class Crud {
 	public function count($field)  {
 		if($field)
 		return $this->db->single("SELECT count(" . $field . ")" . " FROM " . $this->table);
-	}	
-	
+	}
+
 
 	private function exec($sql, $array = null) {
-		
+
 		if($array !== null) {
 			// Get result with the DB object
-			$result =  $this->db->query($sql, $array);	
+			$result =  $this->db->query($sql, $array);
 		}
 		else {
 			// Get result with the DB object
-			$result =  $this->db->query($sql, $this->variables);	
+			$result =  $this->db->query($sql, $this->variables);
 		}
-		
+
 		// Empty bindings
 		$this->variables = array();
 
